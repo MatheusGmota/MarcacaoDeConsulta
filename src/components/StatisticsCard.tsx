@@ -40,7 +40,7 @@ const Container = styled.View<{ color: string }>`
   min-height: 120px;
   justify-content: space-between;
   border-left-width: 4px;
-  border-left-color: ${(props) => props.color};
+  border-left-color: ${(props: { color: any; }) => props.color};
   shadow-color: ${theme.colors.text};
   shadow-offset: 0px 2px;
   shadow-opacity: 0.1;
@@ -68,7 +68,7 @@ const Title = styled.Text`
 const Value = styled.Text<{ color: string }>`
   font-size: 28px;
   font-weight: bold;
-  color: ${(props) => props.color};
+  color: ${(props: { color: any; }) => props.color};
   margin-bottom: 4px;
 `;
 

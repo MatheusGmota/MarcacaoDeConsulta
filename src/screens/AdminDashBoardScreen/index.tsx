@@ -1,12 +1,14 @@
-import { useNavigation } from "@react-navigation/native";
-import { AdminDashboardScreenProps } from "./types/typeAdminDashBoardScreen";
 import { useAdminDashBoardScreen } from "./hooks/useAdminDashBoardScreen";
 import { Container, styles, Title } from "./styles";
-import { ScrollView, ViewStyle } from "react-native";
-import { Button } from "react-native-elements";
+import { ScrollView, TextStyle, ViewStyle, Text } from "react-native";
+import { Button, ListItem } from "react-native-elements";
 import Header from "../../components/Header";
+import StatisticsCard from "../../components/StatisticsCard";
+import theme from "../../styles/theme";
+import { AppointmentCard, ButtonContainer, EmptyText, LoadingText, SectionTitle, SpecialtyContainer, SpecialtyCount, SpecialtyItem, SpecialtyName, StatisticsGrid, StatusBadge, StatusText } from "../../styles/globalStyles";
+import { getStatusText } from "../../utils/status";
 
-const AdminDashboardScreen: React.FC = () => {
+export const AdminDashboardScreen: React.FC = () => {
   const { 
     user,
     signOut,
@@ -17,57 +19,6 @@ const AdminDashboardScreen: React.FC = () => {
     loading,
     handleUpdateStatus
   } = useAdminDashBoardScreen();
-
-  const loadData = async () => {
-    try {
-      // Carrega estatísticas
-      const stats = await statisticsService.getGeneralStatistics();
-      setStatistics(stats);
-      // Carrega consultas
-      const storedAppointments = await AsyncStorage.getItem('@MedicalApp:appointments');
-      if (storedAppointments) {
-        const allAppointments: Appointment[] = JSON.parse(storedAppointments);
-        setAppointments(allAppointments);
-      }
-
-      // Carrega usuários
-      const storedUsers = await AsyncStorage.getItem('@MedicalApp:users');
-      if (storedUsers) {
-        const allUsers: User[] = JSON.parse(storedUsers);
-        setUsers(allUsers);
-      }
-    } catch (error) {
-      console.error('Erro ao carregar dados:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Carrega os dados quando a tela estiver em foco
-  useFocusEffect(
-    React.useCallback(() => {
-      loadData();
-    }, [])
-  );
-
-  const handleUpdateStatus = async (appointmentId: string, newStatus: 'confirmed' | 'cancelled') => {
-    try {
-      const storedAppointments = await AsyncStorage.getItem('@MedicalApp:appointments');
-      if (storedAppointments) {
-        const allAppointments: Appointment[] = JSON.parse(storedAppointments);
-        const updatedAppointments = allAppointments.map(appointment => {
-          if (appointment.id === appointmentId) {
-            return { ...appointment, status: newStatus };
-          }
-          return appointment;
-        });
-        await AsyncStorage.setItem('@MedicalApp:appointments', JSON.stringify(updatedAppointments));
-        loadData(); // Recarrega os dados
-      }
-    } catch (error) {
-      console.error('Erro ao atualizar status:', error);
-    }
-  };
 
   return (
     <Container>

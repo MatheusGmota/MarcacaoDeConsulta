@@ -12,6 +12,13 @@ export const Content = styled.View`
   padding: ${theme.spacing.medium}px;
 `;
 
+export const HeaderContainer = styled.View`
+`
+export const HeaderTitle = styled.View`
+  background-color: ${theme.colors.white};
+  border-radius: 8px;
+`
+
 export const AppointmentList = styled(FlatList)`
   flex: 1;
 `;

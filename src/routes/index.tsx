@@ -1,3 +1,4 @@
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CreateAppointmentScreen from '../screens/CreateAppointmentScreen';
 import HomeScreen from '../screens/HomeScreen';

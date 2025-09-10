@@ -12,7 +12,7 @@ import CreateAppointmentScreen from '../screens/CreateAppointmentScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import AdminDashboardScreen from '../screens/AdminDashboardScreen';
 import DoctorDashboardScreen from '../screens/DoctorDashBoardScreen';
-import PatientDashboardScreen from '../screens/PatientDashBoardScreen';
+import PatientDashboardScreen from '../screens/PatientDashBoard';
 import EditProfileScreen from '../screens/EditProfileScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
 import SettingsScreen from '../screens/SettingsScreen';

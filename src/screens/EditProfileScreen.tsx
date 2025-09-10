@@ -6,6 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/navigation';
+import { Doctor } from '../types/auth';
 import theme from '../styles/theme';
 import Header from '../components/Header';
 import ProfileImagePicker from '../components/ProfileImagePicker';
@@ -22,7 +23,7 @@ const EditProfileScreen: React.FC = () => {
 
     const [name, setName] = useState(user?.name || '');
     const [email, setEmail] = useState(user?.email || '');
-    const [specialty, setSpecialty] = useState(user?.specialty || '');
+    const [specialty, setSpecialty] = useState(user?.role === 'doctor' ? (user as Doctor).specialty : '');
     const [profileImage, setProfileImage] = useState(user?.image || '');
     const [loading, setLoading] = useState(false);
 

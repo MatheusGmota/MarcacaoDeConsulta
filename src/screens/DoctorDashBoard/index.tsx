@@ -8,6 +8,8 @@ import { useDoctorDashBoard } from './hook/useDoctorDashBoard';
 import theme from '../../styles/theme';
 import AppointmentActionModal from '../../components/AppointmentActionModal';
 import Header from '../../components/Header';
+import AppointmentItem from './components/AppointmentItem';
+import StatisticSection from './components/StatisticsSection';
 
 const DoctorDashboardScreen: React.FC = () => {
     const { signOut } = useAuth();
@@ -15,14 +17,11 @@ const DoctorDashboardScreen: React.FC = () => {
         statistics,
         navigation,
         appointments,
-        loading,
         modalVisible,
         selectedAppointment,
         actionType,
-        handleOpenModal,
         handleCloseModal,
         handleConfirmAction,
-        getStatusText,
     } = useDoctorDashBoard();
 
     return (
@@ -45,94 +44,9 @@ const DoctorDashboardScreen: React.FC = () => {
                     buttonStyle={styles.settingsButton}
                 />
 
-                <SectionTitle>Estatísticas Gerais</SectionTitle>
-                {statistics && (
-                    <StatisticsGrid>
-                        <StatisticsCard
-                            title="Total de Consultas"
-                            value={statistics.totalAppointments}
-                            color={theme.colors.primary}
-                            subtitle="Todas as consultas"
-                        />
-                        <StatisticsCard
-                            title="Consultas Confirmadas"
-                            value={statistics.confirmedAppointments}
-                            color={theme.colors.success}
-                            subtitle={`${statistics.statusPercentages?.confirmed.toFixed(1)}% do total`}
-                        />
-                        <StatisticsCard
-                            title="Pacientes Ativos"
-                            value={statistics.totalPatients}
-                            color={theme.colors.secondary}
-                            subtitle="Pacientes únicos"
-                        />
-                        <StatisticsCard
-                            title="Médicos Ativos"
-                            value={statistics.totalDoctors}
-                            color={theme.colors.warning}
-                            subtitle="Médicos com consultas"
-                        />
-                    </StatisticsGrid>
-                )}
+                <StatisticSection statistics={statistics}/>
 
-                <SectionTitle>Especialidades Mais Procuradas</SectionTitle>
-                {statistics && Object.entries(statistics.specialties ?? {}).length > 0 && (
-                    <SpecialtyContainer>
-                        {Object.entries(statistics.specialties ?? {})
-                            .sort(([, a], [, b]) => b - a)
-                            .slice(0, 3)
-                            .map(([specialty, count]) => (
-                                <SpecialtyItem key={specialty}>
-                                    <SpecialtyName>{specialty}</SpecialtyName>
-                                    <SpecialtyCount>{count} consultas</SpecialtyCount>
-                                </SpecialtyItem>
-                            ))
-                        }
-                    </SpecialtyContainer>
-                )}
-
-                {loading ? (
-                    <LoadingText>Carregando consultas...</LoadingText>
-                ) : appointments.length === 0 ? (
-                    <EmptyText>Nenhuma consulta agendada</EmptyText>
-                ) : (
-                    appointments.map((appointment) => (
-                        <AppointmentCard key={appointment.id}>
-                            <ListItem.Content>
-                                <ListItem.Title style={styles.patientName as TextStyle}>
-                                    Paciente: {appointment.patientName || 'Nome não disponível'}
-                                </ListItem.Title>
-                                <ListItem.Subtitle style={styles.dateTime as TextStyle}>
-                                    {appointment.date} às {appointment.time}
-                                </ListItem.Subtitle>
-                                <Text style={styles.specialty as TextStyle}>
-                                    {appointment.specialty}
-                                </Text>
-                                <StatusBadge status={appointment.status}>
-                                    <StatusText status={appointment.status}>
-                                        {getStatusText(appointment.status)}
-                                    </StatusText>
-                                </StatusBadge>
-                                {appointment.status === 'pending' && (
-                                    <ButtonContainer>
-                                        <Button
-                                            title="Confirmar"
-                                            onPress={() => handleOpenModal(appointment, 'confirm')}
-                                            containerStyle={styles.actionButton as ViewStyle}
-                                            buttonStyle={styles.confirmButton}
-                                        />
-                                        <Button
-                                            title="Cancelar"
-                                            onPress={() => handleOpenModal(appointment, 'cancel')}
-                                            containerStyle={styles.actionButton as ViewStyle}
-                                            buttonStyle={styles.cancelButton}
-                                        />
-                                    </ButtonContainer>
-                                )}
-                            </ListItem.Content>
-                        </AppointmentCard>
-                    ))
-                )}
+                <AppointmentItem appointments={appointments}/>
 
                 <Button
                     title="Sair"

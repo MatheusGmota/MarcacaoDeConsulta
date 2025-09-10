@@ -4,55 +4,64 @@ import { ListItem } from "react-native-elements";
 import { useDoctorDashBoard } from "./hook/useDoctorDashBoard";
 import { StyledProps } from "./interface/interface";
 
-const { getStatusColor } = useDoctorDashBoard();
+const getStatusColor = (status: string) => {
+  switch (status) {
+    case 'confirmed':
+      return theme.colors.success;
+    case 'cancelled':
+      return theme.colors.error;
+    default:
+      return theme.colors.warning;
+  }
+};
 
 export const styles = {
-    scrollContent: {
-        padding: 20,
-    },
-    button: {
-        marginBottom: 20,
-        width: '100%',
-    },
-    buttonStyle: {
-        backgroundColor: theme.colors.primary,
-        paddingVertical: 12,
-    },
-    logoutButton: {
-        backgroundColor: theme.colors.error,
-        paddingVertical: 12,
-    },
-    actionButton: {
-        marginTop: 8,
-        width: '48%',
-    },
-    confirmButton: {
-        backgroundColor: theme.colors.success,
-        paddingVertical: 8,
-    },
-    cancelButton: {
-        backgroundColor: theme.colors.error,
-        paddingVertical: 8,
-    },
-    patientName: {
-        fontSize: 16,
-        fontWeight: '700',
-        color: theme.colors.text,
-    },
-    specialty: {
-        fontSize: 14,
-        fontWeight: '500',
-        color: theme.colors.text,
-    },
-    settingsButton: {
-        backgroundColor: theme.colors.secondary,
-        paddingVertical: 12,
-    },
-    dateTime: {
-        fontSize: 16,
-        fontWeight: '700',
-        color: theme.colors.text,
-    },
+  scrollContent: {
+    padding: 20,
+  },
+  button: {
+    marginBottom: 20,
+    width: '100%',
+  },
+  buttonStyle: {
+    backgroundColor: theme.colors.primary,
+    paddingVertical: 12,
+  },
+  logoutButton: {
+    backgroundColor: theme.colors.error,
+    paddingVertical: 12,
+  },
+  actionButton: {
+    marginTop: 8,
+    width: '48%',
+  },
+  confirmButton: {
+    backgroundColor: theme.colors.success,
+    paddingVertical: 8,
+  },
+  cancelButton: {
+    backgroundColor: theme.colors.error,
+    paddingVertical: 8,
+  },
+  patientName: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: theme.colors.text,
+  },
+  specialty: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: theme.colors.text,
+  },
+  settingsButton: {
+    backgroundColor: theme.colors.secondary,
+    paddingVertical: 12,
+  },
+  dateTime: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: theme.colors.text,
+  },
 };
 
 export const Container = styled.View`

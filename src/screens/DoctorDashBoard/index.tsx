@@ -1,12 +1,13 @@
 import React from 'react';
 import { ScrollView, TextStyle, ViewStyle } from 'react-native';
-import { Button, Header, ListItem, Text } from 'react-native-elements';
+import { Button, ListItem, Text } from 'react-native-elements';
 import { useAuth } from '../../contexts/AuthContext';
 import { AppointmentCard, ButtonContainer, Container, EmptyText, LoadingText, SectionTitle, SpecialtyContainer, SpecialtyCount, SpecialtyItem, SpecialtyName, StatisticsGrid, StatusBadge, StatusText, styles, Title } from './styles';
 import StatisticsCard from '../../components/StatisticsCard';
 import { useDoctorDashBoard } from './hook/useDoctorDashBoard';
 import theme from '../../styles/theme';
 import AppointmentActionModal from '../../components/AppointmentActionModal';
+import Header from '../../components/Header';
 
 const DoctorDashboardScreen: React.FC = () => {
     const { signOut } = useAuth();

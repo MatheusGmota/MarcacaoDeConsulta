@@ -100,17 +100,6 @@ export const useDoctorDashBoard = () => {
         }, [])
     );
 
-    const getStatusColor = (status: string) => {
-        switch (status) {
-            case 'confirmed':
-                return theme.colors.success;
-            case 'cancelled':
-                return theme.colors.error;
-            default:
-                return theme.colors.warning;
-        }
-    };
-
     const getStatusText = (status: string) => {
         switch (status) {
             case 'confirmed':
@@ -133,7 +122,6 @@ export const useDoctorDashBoard = () => {
         handleOpenModal,
         handleCloseModal,
         handleConfirmAction,
-        getStatusColor,
         getStatusText,
     }
 }

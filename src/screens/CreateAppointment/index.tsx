@@ -14,7 +14,7 @@ import { AppointmentService } from './services/appointmentService';
 const CreateAppointmentScreen: React.FC = () => {
   const { user } = useAuth();
   const navigation = useNavigation();
-  
+
   // Hook para gerenciar o formulário
   const {
     date,

@@ -30,6 +30,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     />
   );
 
+  const handleCreateAppointment = () => {
+    navigation.navigate('CreateAppointment');
+  };
+
   return (
     <Container>
       <HeaderContainer>

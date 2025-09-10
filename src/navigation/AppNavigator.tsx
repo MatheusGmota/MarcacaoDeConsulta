@@ -16,6 +16,7 @@ import PatientDashboardScreen from '../screens/PatientDashBoardScreen';
 import EditProfileScreen from '../screens/EditProfileScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import UserManagementScreen from '../screens/UserManagement';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -96,6 +97,11 @@ export const AppNavigator: React.FC = () => {
               name="Settings" 
               component={SettingsScreen}
               options={{ title: 'Configurações' }}
+            />
+            <Stack.Screen 
+              name="UserManagement" 
+              component={UserManagementScreen}
+              options={{ title: 'Controle de usuários' }}
             />
           </>
         )}

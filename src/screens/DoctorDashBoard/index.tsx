@@ -1,11 +1,9 @@
 import React from 'react';
-import { ScrollView, TextStyle, ViewStyle } from 'react-native';
-import { Button, ListItem, Text } from 'react-native-elements';
+import { ScrollView, ViewStyle } from 'react-native';
+import { Button } from 'react-native-elements';
 import { useAuth } from '../../contexts/AuthContext';
-import { AppointmentCard, ButtonContainer, Container, EmptyText, LoadingText, SectionTitle, SpecialtyContainer, SpecialtyCount, SpecialtyItem, SpecialtyName, StatisticsGrid, StatusBadge, StatusText, styles, Title } from './styles';
-import StatisticsCard from '../../components/StatisticsCard';
+import { Container, styles, Title } from './styles';
 import { useDoctorDashBoard } from './hook/useDoctorDashBoard';
-import theme from '../../styles/theme';
 import AppointmentActionModal from '../../components/AppointmentActionModal';
 import Header from '../../components/Header';
 import AppointmentItem from './components/AppointmentItem';

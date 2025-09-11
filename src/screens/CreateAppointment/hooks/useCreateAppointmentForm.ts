@@ -1,28 +1,31 @@
 import { useState } from 'react';
 import { Doctor } from '../models/Appointment';
+import { useAuth } from '../../../contexts/AuthContext';
+import { useNavigation } from '@react-navigation/native';
+import { AppointmentService } from '../services/appointmentService';
 
 export const useCreateAppointmentForm = () => {
-  // Estados do formulário
+  const { user } = useAuth();
+  const navigation = useNavigation();
   const [date, setDate] = useState('');
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Funções para atualizar estados
   const updateDate = (newDate: string) => {
     setDate(newDate);
-    setError(''); // Limpa erro quando usuário digita
+    setError('');
   };
 
   const updateSelectedTime = (time: string) => {
     setSelectedTime(time);
-    setError(''); // Limpa erro quando usuário seleciona
+    setError('');
   };
 
   const updateSelectedDoctor = (doctor: Doctor | null) => {
     setSelectedDoctor(doctor);
-    setError(''); // Limpa erro quando usuário seleciona
+    setError('');
   };
 
   const setLoadingState = (isLoading: boolean) => {
@@ -37,20 +40,48 @@ export const useCreateAppointmentForm = () => {
     setError('');
   };
 
+  const handleCreateAppointment = async () => {
+    try {
+      setLoadingState(true);
+      setErrorMessage('');
+
+      if (!date || !selectedTime || !selectedDoctor) {
+        setErrorMessage('Por favor, preencha a data e selecione um médico e horário');
+        return;
+      }
+
+      // Usa o service para criar a consulta
+      await AppointmentService.createAppointment(
+        date,
+        selectedTime,
+        selectedDoctor,
+        user?.id || '',
+        user?.name || ''
+      );
+
+      alert('Consulta agendada com sucesso!');
+      navigation.goBack();
+    } catch (err) {
+      setErrorMessage('Erro ao agendar consulta. Tente novamente.');
+    } finally {
+      setLoadingState(false);
+    }
+  };
+
   return {
-    // Estados
+    user,
+    navigation,
     date,
     selectedTime,
     selectedDoctor,
     loading,
     error,
-    
-    // Funções
     updateDate,
     updateSelectedTime,
     updateSelectedDoctor,
     setLoadingState,
     setErrorMessage,
     clearError,
+    handleCreateAppointment,
   };
 };

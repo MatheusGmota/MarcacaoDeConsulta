@@ -10,52 +10,15 @@ import { useAuth } from '../../contexts/AuthContext';
 import { availableDoctors } from './models/availableDoctors';
 import { useCreateAppointmentForm } from './hooks/useCreateAppointmentForm';
 import { AppointmentService } from './services/appointmentService';
+import { AppointmentInputs } from './components/AppointmentInputs';
 
 const CreateAppointmentScreen: React.FC = () => {
-  const { user } = useAuth();
-  const navigation = useNavigation();
-
-  // Hook para gerenciar o formulário
   const {
-    date,
-    selectedTime,
-    selectedDoctor,
+    navigation,
     loading,
     error,
-    updateDate,
-    updateSelectedTime,
-    updateSelectedDoctor,
-    setLoadingState,
-    setErrorMessage,
+    handleCreateAppointment,
   } = useCreateAppointmentForm();
-
-  const handleCreateAppointment = async () => {
-    try {
-      setLoadingState(true);
-      setErrorMessage('');
-
-      if (!date || !selectedTime || !selectedDoctor) {
-        setErrorMessage('Por favor, preencha a data e selecione um médico e horário');
-        return;
-      }
-
-      // Usa o service para criar a consulta
-      await AppointmentService.createAppointment(
-        date,
-        selectedTime,
-        selectedDoctor,
-        user?.id || '',
-        user?.name || ''
-      );
-
-      alert('Consulta agendada com sucesso!');
-      navigation.goBack();
-    } catch (err) {
-      setErrorMessage('Erro ao agendar consulta. Tente novamente.');
-    } finally {
-      setLoadingState(false);
-    }
-  };
 
   return (
     <Container>
@@ -63,26 +26,7 @@ const CreateAppointmentScreen: React.FC = () => {
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Title>Agendar Consulta</Title>
 
-        <Input
-          placeholder="Data (DD/MM/AAAA)"
-          value={date}
-          onChangeText={updateDate}
-          containerStyle={styles.input}
-          keyboardType="numeric"
-        />
-
-        <SectionTitle>Selecione um Horário</SectionTitle>
-        <TimeSlotList
-          onSelectTime={updateSelectedTime}
-          selectedTime={selectedTime}
-        />
-
-        <SectionTitle>Selecione um Médico</SectionTitle>
-        <DoctorList
-          doctors={availableDoctors}
-          onSelectDoctor={updateSelectedDoctor}
-          selectedDoctorId={selectedDoctor?.id}
-        />
+        <AppointmentInputs />
 
         {error ? <ErrorText>{error}</ErrorText> : null}
 

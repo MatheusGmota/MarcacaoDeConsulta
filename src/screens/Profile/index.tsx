@@ -7,6 +7,7 @@ import { Container, Email, Name, ProfileCard, RoleBadge, RoleText, SpecialtyText
 import Header from '../../components/Header';
 import ProfileImagePicker from '../../components/ProfileImagePicker';
 import { useProfile } from './hook/useProfile';
+import { ProfileSection } from './components/ProfileSection';
 
 const ProfileScreen: React.FC = () => {
     const {
@@ -22,23 +23,10 @@ const ProfileScreen: React.FC = () => {
             <ScrollView contentContainerStyle={styles.scrollContent}>
                 <Title>Meu Perfil</Title>
 
-                <ProfileCard>
-                    <ProfileImagePicker
-                        currentImageUri={user?.image}
-                        onImageSelected={() => { }} // Read-only na tela de perfil
-                        size={120}
-                        editable={false}
-                    />
-                    <Name>{user?.name}</Name>
-                    <Email>{user?.email}</Email>
-                    <RoleBadge role={user?.role || ''}>
-                        <RoleText>{getRoleText(user?.role || '')}</RoleText>
-                    </RoleBadge>
-
-                    {user?.role === 'doctor' && (
-                        <SpecialtyText>Especialidade: {user?.specialty}</SpecialtyText>
-                    )}
-                </ProfileCard>
+                <ProfileSection
+                    user={user}
+                    getRoleText={getRoleText}
+                />
 
                 <Button
                     title="Editar Perfil"

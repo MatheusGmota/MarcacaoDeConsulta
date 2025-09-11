@@ -4,17 +4,25 @@ import { availableDoctors } from "../models/availableDoctors";
 import { SectionTitle, styles } from "../styles";
 import TimeSlotList from "../../../components/TimeSlotList";
 import DoctorList from "../../../components/DoctorList";
+import { Doctor } from "../../../types";
 
-export const AppointmentInputs: React.FC = () => {
-    const {
-        date,
-        updateDate,
-        updateSelectedTime,
-        selectedTime,
-        updateSelectedDoctor,
-        selectedDoctor
-    } = useCreateAppointmentForm();
-    
+interface AppointmentInputsProps {
+    date: string;
+    updateDate: (newDate: string) => void;
+    updateSelectedTime: (time: string) => void;
+    selectedTime: string;
+    updateSelectedDoctor: (doctor: Doctor | null) => void;
+    selectedDoctor: Doctor | null;
+}
+
+export const AppointmentInputs: React.FC<AppointmentInputsProps> = ({
+    date,
+    updateDate,
+    updateSelectedTime,
+    selectedTime,
+    updateSelectedDoctor,
+    selectedDoctor }) => {
+
     return (
         <>
             <Input

@@ -11,12 +11,19 @@ import { availableDoctors } from './models/availableDoctors';
 import { useCreateAppointmentForm } from './hooks/useCreateAppointmentForm';
 import { AppointmentService } from './services/appointmentService';
 import { AppointmentInputs } from './components/AppointmentInputs';
+import { CreateAppointmentActions } from './components/CreateAppointmentActions';
 
 const CreateAppointmentScreen: React.FC = () => {
   const {
     navigation,
+    date,
+    selectedTime,
+    selectedDoctor,
     loading,
     error,
+    updateDate,
+    updateSelectedTime,
+    updateSelectedDoctor,
     handleCreateAppointment,
   } = useCreateAppointmentForm();
 
@@ -26,23 +33,21 @@ const CreateAppointmentScreen: React.FC = () => {
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Title>Agendar Consulta</Title>
 
-        <AppointmentInputs />
+        <AppointmentInputs
+          date={date}
+          updateDate={updateDate}
+          updateSelectedTime={updateSelectedTime}
+          selectedTime={selectedTime}
+          updateSelectedDoctor={updateSelectedDoctor}
+          selectedDoctor={selectedDoctor}
+        />
 
         {error ? <ErrorText>{error}</ErrorText> : null}
 
-        <Button
-          title="Agendar"
-          onPress={handleCreateAppointment}
+        <CreateAppointmentActions
           loading={loading}
-          containerStyle={styles.button as ViewStyle}
-          buttonStyle={styles.buttonStyle}
-        />
-
-        <Button
-          title="Cancelar"
-          onPress={() => navigation.goBack()}
-          containerStyle={styles.button as ViewStyle}
-          buttonStyle={styles.cancelButton}
+          handleCreateAppointment={handleCreateAppointment}
+          navigation={navigation}
         />
       </ScrollView>
     </Container>

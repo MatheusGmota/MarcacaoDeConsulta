@@ -3,13 +3,17 @@ import { styles } from "../styles"
 import { ViewStyle } from "react-native"
 import { useCreateAppointmentForm } from "../hooks/useCreateAppointmentForm"
 
-export const CreateAppointmentActions: React.FC = () => {
-    const {
-        loading,
-        handleCreateAppointment,
-        navigation
-    } = useCreateAppointmentForm();
+interface CreateAppointmentActionsProps {
+    loading: boolean;
+    handleCreateAppointment: () => Promise<void>;
+    navigation: any;
+}
 
+export const CreateAppointmentActions: React.FC<CreateAppointmentActionsProps> = ({ 
+    loading, 
+    handleCreateAppointment, 
+    navigation }) => {
+        
     return (
         <>
             <Button

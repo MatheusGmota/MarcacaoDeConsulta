@@ -4,14 +4,12 @@ import { Button, ListItem, Text } from 'react-native-elements';
 import { AppointmentCard, Container, EmptyText, LoadingText, StatusBadge, StatusText, styles, Title } from './styles';
 import Header from '../../components/Header';
 import { usePatientDashBoard } from './hook/usePatientDashBoard';
+import { ButtonSection } from './components/ButtonSection';
+import { AppointmentList } from './components/AppointmentList';
 
 const PatientDashboardScreen: React.FC = () => {
     const {
         signOut,
-        navigation,
-        appointments,
-        loading,
-        getStatusText
     } = usePatientDashBoard();
 
     return (
@@ -20,56 +18,9 @@ const PatientDashboardScreen: React.FC = () => {
             <ScrollView contentContainerStyle={styles.scrollContent}>
                 <Title>Minhas Consultas</Title>
 
-                <Button
-                    title="Agendar Nova Consulta"
-                    onPress={() => navigation.navigate('CreateAppointment')}
-                    containerStyle={styles.button as ViewStyle}
-                    buttonStyle={styles.buttonStyle}
-                />
+                <ButtonSection />
 
-                <Button
-                    title="Meu Perfil"
-                    onPress={() => navigation.navigate('Profile')}
-                    containerStyle={styles.button as ViewStyle}
-                    buttonStyle={styles.buttonStyle}
-                />
-
-                <Button
-                    title="Configurações"
-                    onPress={() => navigation.navigate('Settings')}
-                    containerStyle={styles.button as ViewStyle}
-                    buttonStyle={styles.settingsButton}
-                />
-
-                {loading ? (
-                    <LoadingText>Carregando consultas...</LoadingText>
-                ) : appointments.length === 0 ? (
-                    <EmptyText>Nenhuma consulta agendada</EmptyText>
-                ) : (
-                    appointments.map((appointment) => (
-                        <AppointmentCard key={appointment.id}>
-                            <ListItem.Content>
-                                <ListItem.Title style={styles.patientName as TextStyle}>
-                                    Paciente: {appointment.patientName}
-                                </ListItem.Title>
-                                <ListItem.Subtitle style={styles.dateTime as TextStyle}>
-                                    {appointment.date} às {appointment.time}
-                                </ListItem.Subtitle>
-                                <Text style={styles.doctorName as TextStyle}>
-                                    {appointment.doctorName}
-                                </Text>
-                                <Text style={styles.specialty as TextStyle}>
-                                    {appointment.specialty}
-                                </Text>
-                                <StatusBadge status={appointment.status}>
-                                    <StatusText status={appointment.status}>
-                                        {getStatusText(appointment.status)}
-                                    </StatusText>
-                                </StatusBadge>
-                            </ListItem.Content>
-                        </AppointmentCard>
-                    ))
-                )}
+                <AppointmentList />
 
                 <Button
                     title="Sair"

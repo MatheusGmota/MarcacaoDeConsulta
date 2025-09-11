@@ -1,10 +1,10 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, ViewStyle } from 'react-native';
+import { Button } from 'react-native-elements';
 import { Container, styles, Title } from './styles';
 import Header from '../../components/Header';
 import { useEditProfile } from './hook/useEditProfile';
 import { ProfileSection } from './components/ProfileSection';
-import { EditProfileActions } from './components/EditrProfileActions';
 
 
 const EditProfileScreen: React.FC = () => {
@@ -43,10 +43,19 @@ const EditProfileScreen: React.FC = () => {
                     user={user}
                 />
 
-                <EditProfileActions
+                <Button
+                    title="Salvar Alterações"
+                    onPress={handleSaveProfile}
                     loading={loading}
-                    handleSaveProfile={handleSaveProfile}
-                    navigation={navigation}
+                    containerStyle={styles.button as ViewStyle}
+                    buttonStyle={styles.saveButton}
+                />
+
+                <Button
+                    title="Cancelar"
+                    onPress={() => navigation.goBack()}
+                    containerStyle={styles.button as ViewStyle}
+                    buttonStyle={styles.cancelButton}
                 />
             </ScrollView>
         </Container>

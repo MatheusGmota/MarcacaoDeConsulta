@@ -1,7 +1,6 @@
 import { ListItem, Text } from "react-native-elements"
 import { AppointmentCard, EmptyText, LoadingText, StatusBadge, StatusText, styles } from "../styles"
 import { TextStyle } from "react-native"
-import { Appointment } from "../interface/interface"
 import { usePatientDashBoard } from "../hook/usePatientDashBoard"
 
 export const AppointmentList: React.FC = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
-import { ScrollView, TextStyle, ViewStyle } from 'react-native';
-import { Button, ListItem, Text } from 'react-native-elements';
-import { AppointmentCard, Container, EmptyText, LoadingText, StatusBadge, StatusText, styles, Title } from './styles';
+import { ScrollView, ViewStyle } from 'react-native';
+import { Button } from 'react-native-elements';
+import { Container, styles, Title } from './styles';
 import Header from '../../components/Header';
 import { usePatientDashBoard } from './hook/usePatientDashBoard';
 import { ButtonSection } from './components/ButtonSection';

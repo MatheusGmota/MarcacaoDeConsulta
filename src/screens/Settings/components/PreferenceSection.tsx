@@ -1,14 +1,17 @@
 import { ListItem, Switch } from "react-native-elements"
 import { SectionTitle, SettingsCard } from "../styles"
 import theme from "../../../styles/theme"
-import { useSettings } from "../hook/useSettings"
+import { AppSettings } from "../interface/interface"
 
-export const PreferenceSection: React.FC = () => {
-    const {
-        settings,
-        updateSetting
-    } = useSettings();
+interface PreferenceSectionProps {
+    settings: AppSettings;
+    updateSetting: (key: keyof AppSettings, value: any) => void;
+}
 
+export const PreferenceSection: React.FC<PreferenceSectionProps> = ({
+    settings,
+    updateSetting
+}) => {
     return (
         <>
             <SectionTitle>Preferências</SectionTitle>

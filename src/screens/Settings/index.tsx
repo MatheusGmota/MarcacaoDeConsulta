@@ -11,8 +11,10 @@ import { CacheSection } from './components/CacheSection';
 const SettingsScreen: React.FC = () => {
     const {
         navigation,
+        settings,
         loading,
         storageInfo,
+        updateSetting,
         handleCreateBackup,
         handleClearCache,
         handleClearAllData
@@ -35,7 +37,10 @@ const SettingsScreen: React.FC = () => {
             <ScrollView contentContainerStyle={styles.scrollContent}>
                 <Title>Configurações</Title>
 
-                <PreferenceSection />
+                <PreferenceSection
+                    settings={settings}
+                    updateSetting={updateSetting}
+                />
 
                 <CacheSection storageInfo={storageInfo} />
 

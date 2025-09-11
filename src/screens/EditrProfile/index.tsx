@@ -1,11 +1,10 @@
 import React from 'react';
-import { ScrollView, ViewStyle, Alert } from 'react-native';
-import { Button, Input } from 'react-native-elements';
-import { Container, ProfileCard, RoleBadge, RoleText, styles, Title } from './styles';
-import { useAuth } from '../../contexts/AuthContext';
-import ProfileImagePicker from '../../components/ProfileImagePicker';
+import { ScrollView } from 'react-native';
+import { Container, styles, Title } from './styles';
 import Header from '../../components/Header';
 import { useEditProfile } from './hook/useEditProfile';
+import { ProfileSection } from './components/ProfileSection';
+import { EditProfileActions } from './components/EditrProfileActions';
 
 
 const EditProfileScreen: React.FC = () => {
@@ -32,60 +31,22 @@ const EditProfileScreen: React.FC = () => {
             <ScrollView contentContainerStyle={styles.scrollContent}>
                 <Title>Editar Perfil</Title>
 
-                <ProfileCard>
-                    <ProfileImagePicker
-                        currentImageUri={profileImage}
-                        onImageSelected={handleImageSelected}
-                        size={120}
-                        editable={true}
-                    />
-
-                    <Input
-                        label="Nome"
-                        value={name}
-                        onChangeText={setName}
-                        containerStyle={styles.input}
-                        placeholder="Digite seu nome"
-                    />
-
-                    <Input
-                        label="Email"
-                        value={email}
-                        onChangeText={setEmail}
-                        containerStyle={styles.input}
-                        placeholder="Digite seu email"
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                    />
-
-                    {user?.role === 'doctor' && (
-                        <Input
-                            label="Especialidade"
-                            value={specialty}
-                            onChangeText={setSpecialty}
-                            containerStyle={styles.input}
-                            placeholder="Digite sua especialidade"
-                        />
-                    )}
-
-                    <RoleBadge role={user?.role || ''}>
-                        <RoleText>{user?.role === 'admin' ? 'Administrador' : user?.role === 'doctor' ? 'Médico' : 'Paciente'}</RoleText>
-                    </RoleBadge>
-                </ProfileCard>
-
-                <Button
-                    title="Salvar Alterações"
-                    onPress={handleSaveProfile}
-                    loading={loading}
-                    containerStyle={styles.button as ViewStyle}
-                    buttonStyle={styles.saveButton}
+                <ProfileSection
+                    profileImage={profileImage}
+                    handleImageSelected={handleImageSelected}
+                    name={name}
+                    setName={setName}
+                    email={email}
+                    setEmail={setEmail}
+                    specialty={specialty}
+                    setSpecialty={setSpecialty}
+                    user={user}
                 />
 
-                <Button
-                    title="Cancelar"
-                    onPress={() => navigation.goBack()}
-                    containerStyle={styles.button as ViewStyle}
-                    buttonStyle={styles.cancelButton}
+                <EditProfileActions
+                    loading={loading}
+                    handleSaveProfile={handleSaveProfile}
+                    navigation={navigation}
                 />
             </ScrollView>
         </Container>

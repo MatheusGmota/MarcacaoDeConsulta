@@ -1,17 +1,24 @@
 import { ListItem } from "react-native-elements"
 import { DateText, EmptyContainer, EmptyText, LoadingText, NotificationCard, NotificationHeader, NotificationIcon, styles, UnreadDot } from "../styles"
-import { useNotifications } from "../hook/useNotifications"
+import { Notification } from "../../../services/notifications";
 
-export const NotificationList: React.FC = () => {
-    const {
-        loading,
-        notifications,
-        handleMarkAsRead,
-        handleDeleteNotification,
-        getNotificationIcon,
-        formatDate
-    } = useNotifications();
+interface NotificationListProps {
+    loading: any;
+    notifications: Notification[];
+    handleMarkAsRead: (notificationId: string) => Promise<void>;
+    handleDeleteNotification: (notification: string) => Promise<void>;
+    getNotificationIcon: (type: string) => "✅" | "❌" | "⏰" | "📩";
+    formatDate: (dateTime: string) => string;
+}
 
+export const NotificationList: React.FC<NotificationListProps> = ({
+    loading,
+    notifications,
+    handleMarkAsRead,
+    handleDeleteNotification,
+    getNotificationIcon,
+    formatDate,
+}) => {
     return (
         <>
             {loading ? (

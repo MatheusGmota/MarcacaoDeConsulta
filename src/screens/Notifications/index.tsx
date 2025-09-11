@@ -7,11 +7,17 @@ import { useNotifications } from './hook/useNotifications';
 import { NotificationList } from './components/NotificationList';
 
 const NotificationsScreen: React.FC = () => {
-    const {
-        navigation,
-        handleMarkAllAsRead,
-        unreadCount
-    } = useNotifications();
+  const {
+    loading,
+    notifications,
+    handleMarkAsRead,
+    handleDeleteNotification,
+    getNotificationIcon,
+    formatDate,
+    navigation,
+    handleMarkAllAsRead,
+    unreadCount
+  } = useNotifications();
 
   return (
     <Container>
@@ -44,8 +50,15 @@ const NotificationsScreen: React.FC = () => {
           buttonStyle={styles.buttonStyle}
         />
 
-        <NotificationList />
-        
+        <NotificationList
+          loading={loading}
+          notifications={notifications}
+          handleMarkAsRead={handleMarkAsRead}
+          handleDeleteNotification={handleDeleteNotification}
+          getNotificationIcon={getNotificationIcon}
+          formatDate={formatDate}
+        />
+
       </ScrollView>
     </Container>
   );

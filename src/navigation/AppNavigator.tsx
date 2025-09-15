@@ -8,14 +8,14 @@ import { RootStackParamList } from '../types/navigation';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import HomeScreen from '../screens/HomeScreen';
-import ProfileScreen from '../screens/ProfileScreen';
 import AdminDashboardScreen from '../screens/AdminDashboardScreen';
 import DoctorDashboardScreen from '../screens/DoctorDashBoardScreen';
 import PatientDashboardScreen from '../screens/PatientDashBoardScreen';
 import EditProfileScreen from '../screens/EditProfileScreen';
-import NotificationsScreen from '../screens/NotificationsScreen';
-import SettingsScreen from '../screens/SettingsScreen';
 import CreateAppointmentScreen from '../screens/CreateAppointment';
+import SettingsScreen from '../screens/Settings';
+import ProfileScreen from '../screens/Profile';
+import NotificationsScreen from '../screens/Notifications';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

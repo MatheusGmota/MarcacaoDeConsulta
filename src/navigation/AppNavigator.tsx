@@ -12,6 +12,7 @@ import AdminDashboardScreen from '../screens/AdminDashboardScreen';
 import DoctorDashboardScreen from '../screens/DoctorDashBoardScreen';
 import PatientDashboardScreen from '../screens/PatientDashBoardScreen';
 import EditProfileScreen from '../screens/EditProfileScreen';
+import UserManagementScreen from '../screens/UserManagement';
 import CreateAppointmentScreen from '../screens/CreateAppointment';
 import SettingsScreen from '../screens/Settings';
 import ProfileScreen from '../screens/Profile';
@@ -96,6 +97,11 @@ export const AppNavigator: React.FC = () => {
               name="Settings"
               component={SettingsScreen}
               options={{ title: 'Configurações' }}
+            />
+            <Stack.Screen 
+              name="UserManagement" 
+              component={UserManagementScreen}
+              options={{ title: 'Controle de usuários' }}
             />
           </>
         )}

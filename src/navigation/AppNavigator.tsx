@@ -43,57 +43,57 @@ export const AppNavigator: React.FC = () => {
           // Rotas protegidas
           <>
             {user.role === 'admin' && (
-              <Stack.Screen 
-                name="AdminDashboard" 
+              <Stack.Screen
+                name="AdminDashboard"
                 component={AdminDashboardScreen}
                 options={{ title: 'Painel Administrativo' }}
               />
             )}
-            
+
             {user.role === 'doctor' && (
-              <Stack.Screen 
-                name="DoctorDashboard" 
+              <Stack.Screen
+                name="DoctorDashboard"
                 component={DoctorDashboardScreen}
                 options={{ title: 'Painel do Médico' }}
               />
             )}
-            
+
             {user.role === 'patient' && (
-              <Stack.Screen 
-                name="PatientDashboard" 
+              <Stack.Screen
+                name="PatientDashboard"
                 component={PatientDashboardScreen}
                 options={{ title: 'Painel do Paciente' }}
               />
             )}
 
             {/* Rotas comuns para todos os usuários autenticados */}
-            <Stack.Screen 
-              name="Home" 
+            <Stack.Screen
+              name="Home"
               component={HomeScreen}
               options={{ title: 'Início' }}
             />
-            <Stack.Screen 
-              name="CreateAppointment" 
+            <Stack.Screen
+              name="CreateAppointment"
               component={CreateAppointmentScreen}
               options={{ title: 'Agendar Consulta' }}
             />
-            <Stack.Screen 
-              name="Profile" 
+            <Stack.Screen
+              name="Profile"
               component={ProfileScreen}
               options={{ title: 'Perfil' }}
             />
-            <Stack.Screen 
-              name="EditProfile" 
+            <Stack.Screen
+              name="EditProfile"
               component={EditProfileScreen}
               options={{ title: 'Editar Perfil' }}
             />
-            <Stack.Screen 
-              name="Notifications" 
+            <Stack.Screen
+              name="Notifications"
               component={NotificationsScreen}
               options={{ title: 'Notificações' }}
             />
-            <Stack.Screen 
-              name="Settings" 
+            <Stack.Screen
+              name="Settings"
               component={SettingsScreen}
               options={{ title: 'Configurações' }}
             />

@@ -16,13 +16,11 @@ const EditProfileScreen: React.FC = () => {
         specialty,
         setSpecialty,
         profileImage,
-        setProfileImage,
         loading,
         handleImageSelected,
         handleSaveProfile,
         user,
         navigation,
-        setLoading,
     } = useEditProfile();
 
     return (

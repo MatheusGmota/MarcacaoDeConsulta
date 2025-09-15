@@ -85,13 +85,11 @@ export const useEditProfile = () => {
         specialty,
         setSpecialty,
         profileImage,
-        setProfileImage,
         loading,
         handleImageSelected,
         handleSaveProfile,
         user,
         navigation,
-        setLoading,
     }
 
 }

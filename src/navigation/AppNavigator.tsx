@@ -8,14 +8,15 @@ import { RootStackParamList } from '../types/navigation';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import HomeScreen from '../screens/HomeScreen';
-import CreateAppointmentScreen from '../screens/CreateAppointmentScreen';
-import ProfileScreen from '../screens/ProfileScreen';
 import AdminDashboardScreen from '../screens/AdminDashboardScreen';
 import PatientDashboardScreen from '../screens/PatientDashBoardScreen';
-import EditProfileScreen from '../screens/EditProfileScreen';
-import NotificationsScreen from '../screens/NotificationsScreen';
-import SettingsScreen from '../screens/SettingsScreen';
 import DoctorDashboardScreen from '../screens/DoctorDashBoard';
+import UserManagementScreen from '../screens/UserManagement';
+import CreateAppointmentScreen from '../screens/CreateAppointment';
+import SettingsScreen from '../screens/Settings';
+import ProfileScreen from '../screens/Profile';
+import NotificationsScreen from '../screens/Notifications';
+import EditProfileScreen from '../screens/EditrProfile';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -96,6 +97,11 @@ export const AppNavigator: React.FC = () => {
               name="Settings"
               component={SettingsScreen}
               options={{ title: 'Configurações' }}
+            />
+            <Stack.Screen 
+              name="UserManagement" 
+              component={UserManagementScreen}
+              options={{ title: 'Controle de usuários' }}
             />
           </>
         )}
